@@ -35,9 +35,7 @@ export default function Navbar() {
               <div className="h-8 w-8 rounded bg-secondary flex items-center justify-center">
                 <Truck className="h-4 w-4 text-primary-foreground" />
               </div>
-              <h1 className="text-xl font-bold text-foreground">
-                EnginDriver
-              </h1>
+              <h1 className="text-xl font-bold text-foreground">EnginDriver</h1>
             </Link>
           </div>
 
@@ -51,19 +49,20 @@ export default function Navbar() {
               <span>Accueil</span>
             </Link>
             <Link
-              to="/driver"
-              className="flex items-center space-x-2 text-secondary hover:text-secondary hover:font-semibold transition-colors"
-            >
-              <Users className="h-4 w-4" />
-              <span>Tous les Chauffeurs</span>
-            </Link>
-            <Link
               to="/about"
               className="flex items-center space-x-2 text-secondary hover:text-secondary hover:font-semibold transition-colors"
             >
               <Info className="h-4 w-4" />
               <span>À propos</span>
             </Link>
+            <Link
+              to="/driver"
+              className="flex items-center space-x-2 text-secondary hover:text-secondary hover:font-semibold transition-colors"
+            >
+              <Users className="h-4 w-4" />
+              <span>Tous les Chauffeurs</span>
+            </Link>
+
             <Link
               to="/contact"
               className="flex items-center space-x-2 text-secondary hover:text-secondary hover:font-semibold transition-colors"
@@ -93,12 +92,12 @@ export default function Navbar() {
                 <Menu className="h-4 w-4 text-secondary" />
               )}
             </Button>
-            <button
+            {/* <button
               onClick={toggleDarkMode}
               className="bg-secondary text-secondary-foreground px-3 py-1 rounded-lg hover:opacity-90 transition"
             >
               Basculer thème
-            </button>
+            </button> */}
           </div>
         </div>
 
@@ -106,15 +105,6 @@ export default function Navbar() {
         {isMobileMenuOpen && (
           <div className="lg:hidden border-t border-border bg-card/95 backdrop-blur">
             <div className="px-4 py-4 space-y-4">
-              {/* Mobile search */}
-              <div className="relative">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-secondary" />
-                <Input
-                  placeholder="Rechercher un chauffeur..."
-                  className="pl-10 bg-background/70"
-                />
-              </div>
-
               {/* Liens mobile */}
               <div className="space-y-3">
                 <Link
@@ -126,14 +116,6 @@ export default function Navbar() {
                   <span>Accueil</span>
                 </Link>
                 <Link
-                  to="/drivers"
-                  className="flex items-center space-x-3 text-secondary hover:text-secondary hover:font-semibold transition-colors py-2"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  <Users className="h-5 w-5" />
-                  <span>Tous les Chauffeurs</span>
-                </Link>
-                <Link
                   to="/about"
                   className="flex items-center space-x-3 text-secondary hover:text-secondary hover:font-semibold transition-colors py-2"
                   onClick={() => setIsMobileMenuOpen(false)}
@@ -141,6 +123,15 @@ export default function Navbar() {
                   <Info className="h-5 w-5" />
                   <span>À propos</span>
                 </Link>
+                <Link
+                  to="/drivers"
+                  className="flex items-center space-x-3 text-secondary hover:text-secondary hover:font-semibold transition-colors py-2"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  <Users className="h-5 w-5" />
+                  <span>Tous les Chauffeurs</span>
+                </Link>
+
                 <Link
                   to="/contact"
                   className="flex items-center space-x-3 text-secondary hover:text-secondary hover:font-semibold transition-colors py-2"

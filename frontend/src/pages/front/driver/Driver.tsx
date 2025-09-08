@@ -16,6 +16,7 @@ import {
   CardHeader,
   CardTitle,
 } from "../../../components/card";
+import { Separator } from "../../../components/separator";
 
 const Driver = () => {
   const [showFilters, setShowFilters] = useState(false);
@@ -180,8 +181,8 @@ const Driver = () => {
       <div className="mb-6">
         <div className="flex gap-4 items-center justify-between">
           <h3 className="text-4xl font-bold text-foreground mb-2 text-balance">
-          Trouvez des professionnels qualifiés pour vos projets
-        </h3>
+            Trouvez des professionnels qualifiés pour vos projets
+          </h3>
           <Button
             variant="outline"
             onClick={() => setShowFilters(!showFilters)}
@@ -346,6 +347,8 @@ const Driver = () => {
                 </div>
               </div>
 
+              <Separator className="my-4" />
+
               {/* Certifications */}
               <div>
                 <div className="flex items-center gap-1 mb-2">
@@ -379,6 +382,8 @@ const Driver = () => {
                   ))}
                 </div>
               </div>
+
+              <Separator className="my-4" />
 
               {/* Rate and Actions */}
               <div className="flex justify-end items-center">
