@@ -1,4 +1,3 @@
-import React from "react";
 import { NavLink } from "react-router-dom";
 import { Truck, Users, Calendar, ArrowRight, Zap } from "lucide-react";
 import { motion } from "framer-motion";
@@ -83,7 +82,10 @@ export default function Home() {
               rapide et fiable.
             </motion.p>
 
-            <motion.div className="flex flex-col sm:flex-row gap-4" variants={itemVariants}>
+            <motion.div
+              className="flex flex-col sm:flex-row gap-4"
+              variants={itemVariants}
+            >
               <NavLink
                 to="/driver"
                 className="inline-flex items-center justify-center px-6 py-3 bg-primary text-primary-foreground rounded-lg font-semibold shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-200 gap-2"
@@ -244,7 +246,9 @@ export default function Home() {
                     <div className="font-semibold text-foreground">
                       {testimonial.author}
                     </div>
-                    <div className="text-sm text-secondary">{testimonial.role}</div>
+                    <div className="text-sm text-secondary">
+                      {testimonial.role}
+                    </div>
                   </div>
                 </div>
               </motion.div>
