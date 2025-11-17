@@ -179,10 +179,7 @@ const Driver = () => {
     <div className="container mx-auto px-4 py-8">
       {/* Search Bar */}
       <div className="mb-6">
-        <div className="flex gap-4 items-center justify-between">
-          <h3 className="text-4xl font-bold text-foreground mb-2 text-balance">
-            Trouvez des professionnels qualifiés pour vos projets
-          </h3>
+        <div className="flex gap-4 items-center justify-end"> 
           <Button
             variant="outline"
             onClick={() => setShowFilters(!showFilters)}
