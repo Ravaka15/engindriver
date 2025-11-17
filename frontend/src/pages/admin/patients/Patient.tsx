@@ -1,5 +1,5 @@
-import { Button } from "../../components/button";
-import { Input } from "../../components/input";
+import { Button } from "../../../components/button";
+import { Input } from "../../../components/input";
 
 export default function Patient() {
   return (
@@ -64,7 +64,9 @@ export default function Patient() {
         <div className="bg-white h-full min-h-0 flex-1 rounded-xl shadow-sm border border-gray-200 overflow-hidden">
           <div className="bg-gray-50 px-6 py-3 border-b border-gray-200">
             <div className="flex items-center justify-between">
-              <h3 className="text-lg font-medium text-gray-900">Liste des patients</h3>
+              <h3 className="text-lg font-medium text-gray-900">
+                Liste des patients
+              </h3>
               <div className="flex items-center space-x-2">
                 <button className="text-gray-400 hover:text-gray-600 transition-colors">
                   <svg

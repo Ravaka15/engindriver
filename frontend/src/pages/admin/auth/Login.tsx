@@ -1,5 +1,5 @@
-import { Button } from "../../components/button";
-import { Input } from "../../components/input";
+import { Button } from "../../../components/button";
+import { Input } from "../../../components/input";
 import med from "../../../assets/med.jpg";
 import logo from "../../../assets/logo2.png";
 import { useState } from "react";
