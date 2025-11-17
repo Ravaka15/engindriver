@@ -7,6 +7,8 @@ import {
   Award,
   Truck,
   Star,
+  Grid3X3,
+  List,
 } from "lucide-react";
 import { Button } from "../../../components/button";
 import { Badge } from "../../../components/badge";
@@ -20,6 +22,7 @@ import { Separator } from "../../../components/separator";
 
 const Driver = () => {
   const [showFilters, setShowFilters] = useState(false);
+  const [viewMode, setViewMode] = useState<"card" | "table">("card");
 
   const [searchTerm, setSearchTerm] = useState("");
   const [filters, setFilters] = useState({
@@ -292,111 +295,236 @@ const Driver = () => {
           {filteredDrivers.length > 1 ? "s" : ""} trouvé
           {filteredDrivers.length > 1 ? "s" : ""}
         </p>
+        <div className="flex gap-2">
+          <Button
+            variant={viewMode === "card" ? "default" : "outline"}
+            size="sm"
+            onClick={() => setViewMode("card")}
+            className="flex items-center gap-2"
+            title="Affichage en cartes"
+          >
+            <Grid3X3 className="h-4 w-4" />
+            Cartes
+          </Button>
+          <Button
+            variant={viewMode === "table" ? "default" : "outline"}
+            size="sm"
+            onClick={() => setViewMode("table")}
+            className="flex items-center gap-2"
+            title="Affichage en tableau"
+          >
+            <List className="h-4 w-4" />
+            Tableau
+          </Button>
+        </div>
       </div>
 
-      {/* Driver Cards Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {filteredDrivers.map((driver) => (
-          <Card key={driver.id} className="hover:shadow-lg transition-shadow">
-            <CardHeader className="pb-4">
-              <div className="flex items-start justify-between">
-                <div className="flex items-center gap-3">
-                  <img
-                    src={driver.image || "/placeholder.svg"}
-                    alt={driver.name}
-                    className="w-12 h-12 rounded-full object-cover"
-                  />
-                  <div>
-                    <CardTitle className="text-lg">{driver.name}</CardTitle>
-                    <div className="flex items-center gap-1 text-sm text-muted-foreground">
-                      <MapPin className="h-3 w-3" />
-                      {driver.location}
+      {/* Driver Cards Grid or Table */}
+      {viewMode === "card" ? (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {filteredDrivers.map((driver) => (
+            <Card key={driver.id} className="hover:shadow-lg transition-shadow">
+              <CardHeader className="pb-4">
+                <div className="flex items-start justify-between">
+                  <div className="flex items-center gap-3">
+                    <img
+                      src={driver.image || "/placeholder.svg"}
+                      alt={driver.name}
+                      className="w-12 h-12 rounded-full object-cover"
+                    />
+                    <div>
+                      <CardTitle className="text-lg">{driver.name}</CardTitle>
+                      <div className="flex items-center gap-1 text-sm text-muted-foreground">
+                        <MapPin className="h-3 w-3" />
+                        {driver.location}
+                      </div>
                     </div>
                   </div>
-                </div>
-                <Badge
-                  variant={
-                    driver.availability === "Disponible"
-                      ? "default"
-                      : "secondary"
-                  }
-                  className={
-                    driver.availability === "Disponible"
-                      ? "bg-green-100 text-green-800 hover:bg-green-100"
-                      : "bg-orange-100 text-orange-400 hover:bg-orange-100"
-                  }
-                >
-                  {driver.availability}
-                </Badge>
-              </div>
-            </CardHeader>
-
-            <CardContent className="space-y-4">
-              {/* Experience and Rating */}
-              <div className="flex justify-between items-center">
-                <div className="flex items-center gap-1 text-sm">
-                  <Calendar className="h-4 w-4 text-black" />
-                  <span>{driver.experience} ans d'expérience</span>
-                </div>
-                <div className="flex items-center gap-1">
-                  <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-                  <span className="text-sm font-medium">{driver.rating}</span>
-                </div>
-              </div>
-
-              <Separator className="my-4" />
-
-              {/* Certifications */}
-              <div>
-                <div className="flex items-center gap-1 mb-2">
-                  <Award className="h-4 w-4 text-black" />
-                  <span className="text-sm font-medium">Certifications</span>
-                </div>
-                <div className="flex flex-wrap gap-1">
-                  {driver.certifications.map((cert) => (
-                    <Badge
-                      key={cert}
-                      variant="secondary"
-                      className="text-xs bg-[#7a73ff6e]"
-                    >
-                      {cert}
-                    </Badge>
-                  ))}
-                </div>
-              </div>
-
-              {/* Equipment */}
-              <div>
-                <div className="flex items-center gap-1 mb-2">
-                  <Truck className="h-4 w-4 text-black" />
-                  <span className="text-sm font-medium">Engins maîtrisés</span>
-                </div>
-                <div className="flex flex-wrap gap-1">
-                  {driver.equipment.map((eq) => (
-                    <Badge key={eq} variant="outline" className="text-xs">
-                      {eq}
-                    </Badge>
-                  ))}
-                </div>
-              </div>
-
-              <Separator className="my-4" />
-
-              {/* Rate and Actions */}
-              <div className="flex justify-end items-center">
-                <div className="flex gap-2">
-                  <Button
-                    size="sm"
-                    className="bg-accent text-accent-foreground hover:bg-accent/90"
+                  <Badge
+                    variant={
+                      driver.availability === "Disponible"
+                        ? "default"
+                        : "secondary"
+                    }
+                    className={
+                      driver.availability === "Disponible"
+                        ? "bg-green-100 text-green-800 hover:bg-green-100"
+                        : "bg-orange-100 text-orange-400 hover:bg-orange-100"
+                    }
                   >
-                    Voir profil
-                  </Button>
+                    {driver.availability}
+                  </Badge>
                 </div>
-              </div>
-            </CardContent>
-          </Card>
-        ))}
-      </div>
+              </CardHeader>
+
+              <CardContent className="space-y-4">
+                {/* Experience and Rating */}
+                <div className="flex justify-between items-center">
+                  <div className="flex items-center gap-1 text-sm">
+                    <Calendar className="h-4 w-4 text-black" />
+                    <span>{driver.experience} ans d'expérience</span>
+                  </div>
+                  <div className="flex items-center gap-1">
+                    <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+                    <span className="text-sm font-medium">{driver.rating}</span>
+                  </div>
+                </div>
+
+                <Separator className="my-4" />
+
+                {/* Certifications */}
+                <div>
+                  <div className="flex items-center gap-1 mb-2">
+                    <Award className="h-4 w-4 text-black" />
+                    <span className="text-sm font-medium">Certifications</span>
+                  </div>
+                  <div className="flex flex-wrap gap-1">
+                    {driver.certifications.map((cert) => (
+                      <Badge
+                        key={cert}
+                        variant="secondary"
+                        className="text-xs bg-[#7a73ff6e]"
+                      >
+                        {cert}
+                      </Badge>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Equipment */}
+                <div>
+                  <div className="flex items-center gap-1 mb-2">
+                    <Truck className="h-4 w-4 text-black" />
+                    <span className="text-sm font-medium">Engins maîtrisés</span>
+                  </div>
+                  <div className="flex flex-wrap gap-1">
+                    {driver.equipment.map((eq) => (
+                      <Badge key={eq} variant="outline" className="text-xs">
+                        {eq}
+                      </Badge>
+                    ))}
+                  </div>
+                </div>
+
+                <Separator className="my-4" />
+
+                {/* Rate and Actions */}
+                <div className="flex justify-end items-center">
+                  <div className="flex gap-2">
+                    <Button
+                      size="sm"
+                      className="bg-accent text-accent-foreground hover:bg-accent/90"
+                    >
+                      Voir profil
+                    </Button>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      ) : (
+        <div className="overflow-x-auto bg-white rounded-xl shadow-lg">
+          <table className="w-full">
+            <thead className="bg-gray-50 border-b border-gray-200">
+              <tr>
+                <th className="px-6 py-3 text-left text-sm font-semibold text-gray-900">
+                  Chauffeur
+                </th>
+                <th className="px-6 py-3 text-left text-sm font-semibold text-gray-900">
+                  Localisation
+                </th>
+                <th className="px-6 py-3 text-left text-sm font-semibold text-gray-900">
+                  Expérience
+                </th>
+                <th className="px-6 py-3 text-left text-sm font-semibold text-gray-900">
+                  Note
+                </th>
+                <th className="px-6 py-3 text-left text-sm font-semibold text-gray-900">
+                  Disponibilité
+                </th>
+                <th className="px-6 py-3 text-left text-sm font-semibold text-gray-900">
+                  Engins
+                </th>
+                <th className="px-6 py-3 text-left text-sm font-semibold text-gray-900">
+                  Action
+                </th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-gray-200">
+              {filteredDrivers.map((driver) => (
+                <tr key={driver.id} className="hover:bg-gray-50 transition-colors">
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <div className="flex items-center gap-3">
+                      <img
+                        src={driver.image || "/placeholder.svg"}
+                        alt={driver.name}
+                        className="w-10 h-10 rounded-full object-cover"
+                      />
+                      <div>
+                        <p className="text-sm font-semibold text-gray-900">
+                          {driver.name}
+                        </p>
+                        <p className="text-xs text-gray-600">{driver.email}</p>
+                      </div>
+                    </div>
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <div className="flex items-center gap-1 text-sm text-gray-600">
+                      <MapPin className="h-4 w-4" />
+                      {driver.location}
+                    </div>
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
+                    {driver.experience} ans
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <div className="flex items-center gap-1">
+                      <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+                      <span className="text-sm font-medium">{driver.rating}</span>
+                    </div>
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <Badge
+                      variant={
+                        driver.availability === "Disponible"
+                          ? "default"
+                          : "secondary"
+                      }
+                      className={
+                        driver.availability === "Disponible"
+                          ? "bg-green-100 text-green-800 hover:bg-green-100"
+                          : "bg-orange-100 text-orange-400 hover:bg-orange-100"
+                      }
+                    >
+                      {driver.availability}
+                    </Badge>
+                  </td>
+                  <td className="px-6 py-4">
+                    <div className="flex flex-wrap gap-1">
+                      {driver.vehicleTypes.slice(0, 2).map((type) => (
+                        <Badge key={type} variant="outline" className="text-xs">
+                          {type}
+                        </Badge>
+                      ))}
+                      {driver.vehicleTypes.length > 2 && (
+                        <Badge variant="outline" className="text-xs">
+                          +{driver.vehicleTypes.length - 2}
+                        </Badge>
+                      )}
+                    </div>
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <Button size="sm" className="bg-accent text-accent-foreground hover:bg-accent/90">
+                      Voir profil
+                    </Button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
 
       {/* No Results */}
       {filteredDrivers.length === 0 && (
