@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import {
   Search,
   Filter,
@@ -413,12 +414,15 @@ const Driver = () => {
                 {/* Rate and Actions */}
                 <div className="flex justify-end items-center">
                   <div className="flex gap-2">
-                    <Button
-                      size="sm"
-                      className="bg-accent text-accent-foreground hover:bg-accent/90"
-                    >
-                      Voir profil
-                    </Button>
+                    <Link to={`/driver/${driver.id}`}>
+                      <Button
+                        size="sm"
+                        className="bg-accent text-accent-foreground hover:bg-accent/90"
+                        aria-label={`Voir le profil de ${driver.name}`}
+                      >
+                        Voir profil
+                      </Button>
+                    </Link>
                   </div>
                 </div>
               </CardContent>
@@ -522,12 +526,15 @@ const Driver = () => {
                     </div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
-                    <Button
-                      size="sm"
-                      className="bg-accent text-accent-foreground hover:bg-accent/90"
-                    >
-                      Voir profil
-                    </Button>
+                    <Link to={`/driver/${driver.id}`}>
+                      <Button
+                        size="sm"
+                        className="bg-accent text-accent-foreground hover:bg-accent/90"
+                        aria-label={`Voir le profil de ${driver.name}`}
+                      >
+                        Voir profil
+                      </Button>
+                    </Link>
                   </td>
                 </tr>
               ))}

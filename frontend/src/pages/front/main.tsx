@@ -4,6 +4,7 @@ import Home from "./home/Home";
 import About from "./about/About";
 import Contact from "./contact/Contact";
 import Driver from "./driver/Driver";
+import DriverProfile from "./driver/DriverProfile";
 import Navbar from "./layout/Navbar";
 import Footer from "./layout/Foooter";
 
@@ -17,6 +18,7 @@ export default class Main extends Component {
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
             <Route path="/driver" element={<Driver />} />
+            <Route path="/driver/:id" element={<DriverProfile />} />
             <Route path="/contact" element={<Contact />} />
           </Routes>
           <Footer />
