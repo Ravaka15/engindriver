@@ -10,11 +10,15 @@ import {
   Phone,
   Info,
   Truck,
+  Sun,
+  Moon,
 } from "lucide-react";
 import { Button } from "../../../components/button";
+import useTheme from "../../../hooks/useTheme";
 
 export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { theme, toggle } = useTheme();
 
   return (
     <nav className="border-b border-border bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50 shadow-sm">
@@ -107,7 +111,7 @@ export default function Navbar() {
           <div className="flex items-center space-x-1">
             <Button
               variant="ghost"
-              size="icon"
+              size="default"
               className="hidden md:flex rounded-lg hover:bg-secondary/10 transition-colors"
               aria-label="Notifications"
             >
@@ -115,15 +119,35 @@ export default function Navbar() {
             </Button>
             <Button
               variant="ghost"
-              size="icon"
+              size="default"
               className="rounded-lg hover:bg-secondary/10 transition-colors"
               aria-label="Mon compte"
             >
               <User className="h-5 w-5 text-secondary hover:text-foreground" />
             </Button>
+
+            {/* Theme toggle */}
             <Button
               variant="ghost"
-              size="icon"
+              size="default"
+              className="rounded-lg hover:bg-secondary/10 transition-colors"
+              onClick={toggle}
+              aria-label={
+                theme === "dark"
+                  ? "Activer le mode clair"
+                  : "Activer le mode sombre"
+              }
+            >
+              {theme === "dark" ? (
+                <Sun className="h-5 w-5 text-secondary hover:text-foreground" />
+              ) : (
+                <Moon className="h-5 w-5 text-secondary hover:text-foreground" />
+              )}
+            </Button>
+
+            <Button
+              variant="ghost"
+              size="default"
               className="lg:hidden rounded-lg hover:bg-secondary/10 transition-colors"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               aria-label={
