@@ -1,4 +1,3 @@
-import React from "react";
 import { CheckCircle2, Award, Users, Lightbulb, MapPin } from "lucide-react";
 import { motion } from "framer-motion";
 
@@ -210,7 +209,9 @@ export default function About() {
                   {member.name}
                 </div>
                 <div className="text-sm text-secondary mb-3">{member.role}</div>
-                <p className="text-xs text-secondary/70">{member.description}</p>
+                <p className="text-xs text-secondary/70">
+                  {member.description}
+                </p>
               </motion.div>
             ))}
           </div>
