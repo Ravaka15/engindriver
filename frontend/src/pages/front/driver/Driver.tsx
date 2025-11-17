@@ -182,7 +182,7 @@ const Driver = () => {
     <div className="container mx-auto px-4 py-8">
       {/* Search Bar */}
       <div className="mb-6">
-        <div className="flex gap-4 items-center justify-end"> 
+        <div className="flex gap-4 items-center justify-end">
           <Button
             variant="outline"
             onClick={() => setShowFilters(!showFilters)}
@@ -395,7 +395,9 @@ const Driver = () => {
                 <div>
                   <div className="flex items-center gap-1 mb-2">
                     <Truck className="h-4 w-4 text-black" />
-                    <span className="text-sm font-medium">Engins maîtrisés</span>
+                    <span className="text-sm font-medium">
+                      Engins maîtrisés
+                    </span>
                   </div>
                   <div className="flex flex-wrap gap-1">
                     {driver.equipment.map((eq) => (
@@ -453,7 +455,10 @@ const Driver = () => {
             </thead>
             <tbody className="divide-y divide-gray-200">
               {filteredDrivers.map((driver) => (
-                <tr key={driver.id} className="hover:bg-gray-50 transition-colors">
+                <tr
+                  key={driver.id}
+                  className="hover:bg-gray-50 transition-colors"
+                >
                   <td className="px-6 py-4 whitespace-nowrap">
                     <div className="flex items-center gap-3">
                       <img
@@ -481,7 +486,9 @@ const Driver = () => {
                   <td className="px-6 py-4 whitespace-nowrap">
                     <div className="flex items-center gap-1">
                       <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-                      <span className="text-sm font-medium">{driver.rating}</span>
+                      <span className="text-sm font-medium">
+                        {driver.rating}
+                      </span>
                     </div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
@@ -515,7 +522,10 @@ const Driver = () => {
                     </div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
-                    <Button size="sm" className="bg-accent text-accent-foreground hover:bg-accent/90">
+                    <Button
+                      size="sm"
+                      className="bg-accent text-accent-foreground hover:bg-accent/90"
+                    >
                       Voir profil
                     </Button>
                   </td>
