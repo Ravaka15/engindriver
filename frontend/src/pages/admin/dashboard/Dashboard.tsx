@@ -1,6 +1,4 @@
 import {
-  Bell,
-  Plus,
   Users,
   Clock,
   MessageSquare,
@@ -47,29 +45,7 @@ const Dashboard = () => {
     },
   ];
 
-  const recentPatients = [
-    {
-      id: 1,
-      name: "Alice Bernard",
-      lastVisit: "2 jours",
-      status: "Stable",
-      condition: "Hypertension",
-    },
-    {
-      id: 2,
-      name: "Marc Rousseau",
-      lastVisit: "1 semaine",
-      status: "Suivi",
-      condition: "Diabète",
-    },
-    {
-      id: 3,
-      name: "Emma Leroy",
-      lastVisit: "3 jours",
-      status: "Amélioration",
-      condition: "Migraine",
-    },
-  ];
+  // recentPatients omitted (unused)
 
   const messages = [
     {

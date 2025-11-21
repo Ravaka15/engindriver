@@ -1,10 +1,7 @@
-import Appointment from "../ui/pages/appointment/Appointment";
-import Dashboard from "../ui/pages/dashboard/Dashboard";
-import Patient from "../ui/pages/patients/Patient";
-import Wrapper from "../ui/pages/wrapper";
-
-
- 
+import Appointment from "../pages/admin/appointment/Appointment";
+import Dashboard from "../pages/admin/dashboard/Dashboard";
+import Patient from "../pages/admin/patients/Patient";
+import Wrapper from "../pages/admin/wrapper";
 
 export const Components = [
   {
@@ -43,4 +40,4 @@ export const Components = [
   //   path: "*",
   //   component: NotFound,
   // },
-]
+];

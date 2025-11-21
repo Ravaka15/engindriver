@@ -1,5 +1,5 @@
 // authService.ts
-import api, { setAccessToken } from "../api/api";
+import { setAccessToken } from "../api/api";
 import axios from "axios";
 
 export async function login(email: string, password: string) {
