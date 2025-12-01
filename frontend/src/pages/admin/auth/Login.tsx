@@ -1,101 +1,101 @@
-import { Button } from "../../../components/button";
-import { Input } from "../../../components/input";
-import med from "../../../assets/med.jpg";
-import logo from "../../../assets/logo2.png";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { authApi } from '../../../service/apiClient';
+import { setAccessToken } from '../../../api/api';
+import { Button } from '../../../components/button';
+import { Input } from '../../../components/input';
+import { Card } from '../../../components/card';
 
-const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+export default function Login() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  const handleLogin = async (e: React.FormEvent) => {
-    // await login("demo@mail.com", "secret");
-    // const me = await api.get("/me");
-    // console.log(me.data);
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (email === "admin@admin.com" && password === "admin") {
-      navigate("/dashboard");
-      toast.success("Connexion réussie", {
-        position: "bottom-right",
-      });
-    } else {
-      toast.error("Email ou mot de passe incorrect", {
-        position: "bottom-right",
-      });
+    setError('');
+    setLoading(true);
+
+    try {
+      const response = await authApi.login(email, password);
+      const { token } = response.data;
+      
+      // Stocker le token
+      setAccessToken(token);
+      localStorage.setItem('token', token);
+      
+      // Rediriger vers le dashboard
+      navigate('/admin/dashboard');
+    } catch (err: any) {
+      setError(err.response?.data?.message || 'Identifiants incorrects');
+    } finally {
+      setLoading(false);
     }
   };
+
   return (
-    <div className="flex flex-row h-screen">
-      <div className="flex-1/2">
-        <img
-          src={med}
-          alt="Login Illustration"
-          className="w-full h-full object-cover"
-        />
-      </div>
-      <div className="flex-1/2 flex flex-col justify-center">
-        <div className="w-96 mx-auto">
-          <div className="flex justify-center mb-6">
-            <img src={logo} alt="Logo" className="h-28 w-28 object-contain" />
-          </div>
-          <h2 className="text-lg font-bold mb-4">Se connecter</h2>
-          <div className="mb-4">
+    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+      <Card className="w-full max-w-md p-8">
+        <div className="text-center mb-8">
+          <h1 className="text-3xl font-bold">Back Office</h1>
+          <p className="text-gray-600 mt-2">Connectez-vous pour accéder au dashboard</p>
+        </div>
+
+        <form onSubmit={handleSubmit} className="space-y-6">
+          {error && (
+            <div className="bg-red-50 text-red-600 p-3 rounded border border-red-200">
+              {error}
+            </div>
+          )}
+
+          <div>
             <label htmlFor="email" className="block text-sm font-medium mb-2">
               Email
             </label>
             <Input
-              type="email"
               id="email"
-              required
+              type="email"
+              value={email}
               onChange={(e) => setEmail(e.target.value)}
+              placeholder="admin@example.com"
+              required
+              disabled={loading}
             />
           </div>
-          <div className="mb-4">
-            <label
-              htmlFor="password"
-              className="block text-sm font-medium mb-2"
-            >
+
+          <div>
+            <label htmlFor="password" className="block text-sm font-medium mb-2">
               Mot de passe
             </label>
             <Input
-              type="password"
               id="password"
-              required
+              type="password"
+              value={password}
               onChange={(e) => setPassword(e.target.value)}
+              placeholder="••••••••"
+              required
+              disabled={loading}
             />
           </div>
+
           <Button
-            variant="default"
-            className="w-full mb-4"
-            onClick={handleLogin}
+            type="submit"
+            className="w-full"
+            disabled={loading}
           >
-            Se connecter
+            {loading ? 'Connexion...' : 'Se connecter'}
           </Button>
-          <div className="flex items-center my-4">
-            <div className="flex-grow h-px bg-gray-300" />
-            <span className="mx-2 text-gray-500 text-sm">ou</span>
-            <div className="flex-grow h-px bg-gray-300" />
-          </div>
-          <div className="flex flex-col gap-2">
-            <Button
-              variant="outline"
-              className="flex items-center justify-center gap-2 w-full"
-            >
-              <img
-                src="https://www.svgrepo.com/show/475656/google-color.svg"
-                alt="Google"
-                className="w-5 h-5"
-              />
-              Se connecter avec Google
-            </Button>
-          </div>
+        </form>
+
+        <div className="mt-6 text-center text-sm text-gray-600">
+          <p>Compte de test :</p>
+          <p className="font-mono text-xs mt-1">
+            Créer un admin avec : php bin/console app:create-admin
+          </p>
         </div>
-      </div>
+      </Card>
     </div>
   );
-};
-
-export default Login;
+}
